@@ -75,7 +75,9 @@ pipeline {
                     </table>
                     <br>
                     <div style="text-align: center;">
-                        <a href="${env.BUILD_URL}Automation_Test_Reports/" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">📊 View Detailed Reports</a>
+                        <a href="${env.BUILD_URL}Automation_Test_Reports/" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📊 View All Reports</a>
+                        <br><br>
+                        <a href="${env.BUILD_URL}Automation_Test_Reports/login/login_Report.html" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">🎯 View Login Test Report</a>
                     </div>
                     <br>
                     <p style="color: #666; font-size: 12px;">This is an automated message from Jenkins CI/CD Pipeline</p>
