@@ -56,7 +56,7 @@ pipeline {
                 <p><strong>View Reports:</strong> <a href="${env.BUILD_URL}Automation_Test_Reports/">Click Here</a></p>
                 """,
                 mimeType: 'text/html',
-                to: 'your-email@gmail.com'
+                to: 'ashokaruldeva@gmail.com'
             )
         }
     }
