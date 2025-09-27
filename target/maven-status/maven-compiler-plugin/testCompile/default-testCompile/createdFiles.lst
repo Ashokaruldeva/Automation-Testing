@@ -1,0 +1,5 @@
+tests\GenericSteps.class
+tests\TestRunner.class
+utils\ExtentReportManager.class
+utils\ScreenshotUtils.class
+hooks\TestHooks.class

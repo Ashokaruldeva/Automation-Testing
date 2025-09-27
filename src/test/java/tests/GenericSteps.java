@@ -2,7 +2,6 @@ package tests;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -24,20 +23,15 @@ public class GenericSteps {
     
     private static WebDriver driver;
     private static WebDriverWait wait;
-    
     private static String currentFeatureName;
     
     public static void setCurrentFeatureName(String featureName) {
         currentFeatureName = featureName;
     }
     
-    public static String getCurrentFeatureName() {
-        return currentFeatureName;
-    }
-    
     private void logStepWithScreenshot(String stepDescription, String stepName) {
         ExtentTest test = ExtentReportManager.getTest();
-        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, getCurrentFeatureName());
+        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, currentFeatureName);
         
         if (screenshotPath != null) {
             try {
@@ -100,22 +94,6 @@ public class GenericSteps {
     public void i_should_be_logged_in_successfully() {
         wait.until(ExpectedConditions.urlContains("dashboard"));
         logStepWithScreenshot("User successfully logged in and redirected to dashboard", "logged_in_dashboard");
-    }
-    
-    @When("I change to dark mode")
-    public void i_change_to_dark_mode() {
-        WebElement userDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.className("oxd-userdropdown-tab")));
-        userDropdown.click();
-        logStepWithScreenshot("Opened user dropdown menu to access theme options", "user_dropdown_opened");
-        
-        WebElement themeOption = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Change Theme")));
-        themeOption.click();
-        logStepWithScreenshot("Clicked on Change Theme option to switch to dark mode", "theme_changed");
-    }
-    
-    @Then("the theme should be changed to dark mode")
-    public void the_theme_should_be_changed_to_dark_mode() {
-        logStepWithScreenshot("Dark mode theme successfully applied to the application", "dark_mode_applied");
     }
     
     @After

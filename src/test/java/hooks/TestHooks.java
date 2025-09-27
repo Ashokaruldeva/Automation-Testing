@@ -9,7 +9,7 @@ import com.aventstack.extentreports.ExtentTest;
 
 public class TestHooks {
     
-    @Before
+    @Before(order = 1)
     public void beforeScenario(Scenario scenario) {
         String featureName = scenario.getUri().toString().replaceAll(".*/", "").replace(".feature", "");
         String scenarioName = scenario.getName();
