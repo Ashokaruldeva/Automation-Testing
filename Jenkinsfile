@@ -39,6 +39,9 @@ pipeline {
                     reportFiles: '**/*_Report.html',
                     reportName: 'Automation Test Reports'
                 ])
+                
+                echo 'Archiving reports...'
+                archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
             }
         }
     }
@@ -75,12 +78,22 @@ pipeline {
                     </table>
                     <br>
                     <div style="text-align: center;">
-                        <a href="${env.BUILD_URL}Automation_Test_Reports/" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📊 View All Reports</a>
+                        <a href="${env.BUILD_URL}Automation_Test_Reports/" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📊 Jenkins HTML Reports</a>
                         <br><br>
-                        <a href="${env.BUILD_URL}Automation_Test_Reports/login_Report.html" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">🎯 Direct Login Report</a>
+                        <a href="${env.BUILD_URL}ws/reports/" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📁 Direct Workspace Reports</a>
                         <br><br>
-                        <a href="${env.BUILD_URL}execution/node/3/ws/reports/login/login_Report.html" style="background-color: #FF9800; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📄 Workspace Report</a>
+                        <a href="${env.BUILD_URL}artifact/reports/" style="background-color: #FF9800; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📦 Archived Reports</a>
                     </div>
+                    <br>
+                    <h3 style="color: #333;">📄 Available Test Reports:</h3>
+                    <p style="color: #666;">Click the 'Browse All Feature Reports' button above to see individual reports for:</p>
+                    <ul style="color: #666; text-align: left; max-width: 400px; margin: 0 auto;">
+                        <li>🔑 Login Feature Report</li>
+                        <li>📧 Registration Feature Report (when added)</li>
+                        <li>🛍️ Shopping Feature Report (when added)</li>
+                        <li>📊 Dashboard Feature Report (when added)</li>
+                        <li>+ Any new feature tests you create</li>
+                    </ul>
                     <br>
                     <p style="color: #666; font-size: 12px;">This is an automated message from Jenkins CI/CD Pipeline</p>
                 </div>
