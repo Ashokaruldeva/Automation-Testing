@@ -26,7 +26,8 @@ public class LoginSteps {
     
     private void logStepWithScreenshot(String stepDescription, String stepName) {
         ExtentTest test = ExtentReportManager.getTest();
-        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, "login");
+        String featureName = test.getModel().getName().toLowerCase().split(" ")[0];
+        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, featureName);
         
         if (screenshotPath != null) {
             try {
