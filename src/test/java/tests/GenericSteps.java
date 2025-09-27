@@ -2,6 +2,7 @@ package tests;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,15 +20,15 @@ import utils.ScreenshotUtils;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
-public class LoginSteps {
+public class GenericSteps {
     
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
+    private static String currentFeatureName;
     
     private void logStepWithScreenshot(String stepDescription, String stepName) {
         ExtentTest test = ExtentReportManager.getTest();
-        String featureName = test.getModel().getName().toLowerCase().split(" ")[0];
-        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, featureName);
+        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, currentFeatureName);
         
         if (screenshotPath != null) {
             try {
@@ -41,7 +42,11 @@ public class LoginSteps {
     }
     
     @Before
-    public void setup() {
+    public void setup(Scenario scenario) {
+        // Extract feature name from scenario URI
+        String featureFile = scenario.getUri().toString();
+        currentFeatureName = featureFile.substring(featureFile.lastIndexOf("/") + 1).replace(".feature", "");
+        
         WebDriverManager.chromedriver().setup();
         
         ChromeOptions options = new ChromeOptions();
@@ -63,16 +68,20 @@ public class LoginSteps {
         logStepWithScreenshot("Successfully navigated to OrangeHRM login page", "login_page");
     }
     
-    @When("I enter username {string} and password {string}")
-    public void i_enter_username_and_password(String username, String password) {
+    @When("I enter username {string}")
+    public void i_enter_username(String username) {
         WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@name='username']")));
         usernameField.clear();
         usernameField.sendKeys(username);
-        
+        logStepWithScreenshot("Entered username: " + username, "username_entered");
+    }
+    
+    @When("I enter password {string}")
+    public void i_enter_password(String password) {
         WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@name='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
-        logStepWithScreenshot("Entered username: " + username + " and password successfully", "credentials_entered");
+        logStepWithScreenshot("Entered password successfully", "password_entered");
     }
     
     @When("I click the login button")
