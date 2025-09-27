@@ -20,9 +20,9 @@ pipeline {
                 echo 'Running automation tests...'
                 script {
                     if (isUnix()) {
-                        sh 'mvn clean test -Dheadless=true'
+                        sh 'mvn clean compile-test-sources test -Dheadless=true -Dmaven.main.skip=true'
                     } else {
-                        bat 'mvn clean test -Dheadless=true'
+                        bat 'mvn clean compile-test-sources test -Dheadless=true -Dmaven.main.skip=true'
                     }
                 }
             }
