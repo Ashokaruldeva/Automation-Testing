@@ -1,19 +1,24 @@
 package hooks;
 
+import com.aventstack.extentreports.ExtentTest;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import utils.ExtentReportManager;
 import tests.GenericSteps;
-import com.aventstack.extentreports.ExtentTest;
+import utils.ExtentReportManager;
 
 public class TestHooks {
     
-    @Before(order = 1)
+    @Before(order = 0)
     public void beforeScenario(Scenario scenario) {
         String featureName = scenario.getUri().toString().replaceAll(".*/", "").replace(".feature", "");
         String scenarioName = scenario.getName();
+        
+        // Set feature name first
         GenericSteps.setCurrentFeatureName(featureName);
+        
+        // Create ExtentReports test
         ExtentReportManager.createTest(featureName, scenarioName);
     }
     

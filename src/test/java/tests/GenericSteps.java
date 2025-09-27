@@ -1,7 +1,6 @@
 package tests;
 
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -21,8 +20,8 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 
 public class GenericSteps {
     
-    private static WebDriver driver;
-    private static WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
     private static String currentFeatureName;
     
     public static void setCurrentFeatureName(String featureName) {
@@ -44,24 +43,26 @@ public class GenericSteps {
         }
     }
     
-    @Before
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        
-        ChromeOptions options = new ChromeOptions();
-        if (System.getProperty("headless", "false").equals("true")) {
-            options.addArguments("--headless");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
+    private void setupDriver() {
+        if (driver == null) {
+            WebDriverManager.chromedriver().setup();
+            
+            ChromeOptions options = new ChromeOptions();
+            if (System.getProperty("headless", "false").equals("true")) {
+                options.addArguments("--headless");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+            }
+            
+            driver = new ChromeDriver(options);
+            driver.manage().window().maximize();
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         }
-        
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
     
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
+        setupDriver();
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("oxd-input")));
         logStepWithScreenshot("Successfully navigated to OrangeHRM login page", "login_page");
@@ -100,6 +101,7 @@ public class GenericSteps {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
+            driver = null;
         }
     }
 }
