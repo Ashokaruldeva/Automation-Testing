@@ -15,6 +15,7 @@ public class TestHooks {
         String featureName = scenario.getUri().toString().replaceAll(".*/", "").replace(".feature", "");
         String scenarioName = scenario.getName();
         
+        
         // Set feature name first
         GenericSteps.setCurrentFeatureName(featureName);
         

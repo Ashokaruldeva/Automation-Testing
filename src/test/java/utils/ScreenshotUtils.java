@@ -12,6 +12,7 @@ public class ScreenshotUtils {
     
     public static String captureScreenshot(WebDriver driver, String stepName, String featureName) {
         try {
+            // Create ONLY the feature-named screenshot folder
             String screenshotDir = "reports/" + featureName + "/" + featureName + "_screenshots";
             Files.createDirectories(Paths.get(screenshotDir));
             
@@ -21,7 +22,9 @@ public class ScreenshotUtils {
             String filePath = screenshotDir + "/" + fileName;
             
             Files.copy(sourceFile.toPath(), Paths.get(filePath));
-            return "./" + featureName + "_screenshots/" + fileName;
+            
+            // Return absolute path to prevent ExtentReports from creating its own folders
+            return new File(filePath).getAbsolutePath();
         } catch (IOException e) {
             System.out.println("Failed to capture screenshot: " + e.getMessage());
             return null;
