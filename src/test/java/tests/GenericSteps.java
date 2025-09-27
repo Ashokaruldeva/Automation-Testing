@@ -24,11 +24,18 @@ public class GenericSteps {
     
     private static WebDriver driver;
     private static WebDriverWait wait;
-    private static String currentFeatureName;
+    
+    private String getFeatureNameFromTest() {
+        ExtentTest test = ExtentReportManager.getTest();
+        String testName = test.getModel().getName();
+        // Extract feature name from test context
+        return testName.toLowerCase().split(" ")[0];
+    }
     
     private void logStepWithScreenshot(String stepDescription, String stepName) {
         ExtentTest test = ExtentReportManager.getTest();
-        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, currentFeatureName);
+        String featureName = getFeatureNameFromTest();
+        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, featureName);
         
         if (screenshotPath != null) {
             try {
@@ -42,11 +49,7 @@ public class GenericSteps {
     }
     
     @Before
-    public void setup(Scenario scenario) {
-        // Extract feature name from scenario URI
-        String featureFile = scenario.getUri().toString();
-        currentFeatureName = featureFile.substring(featureFile.lastIndexOf("/") + 1).replace(".feature", "");
-        
+    public void setup() {
         WebDriverManager.chromedriver().setup();
         
         ChromeOptions options = new ChromeOptions();

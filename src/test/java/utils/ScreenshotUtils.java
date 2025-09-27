@@ -12,7 +12,7 @@ public class ScreenshotUtils {
     
     public static String captureScreenshot(WebDriver driver, String stepName, String featureName) {
         try {
-            String screenshotDir = "reports/" + featureName + "/screenshots";
+            String screenshotDir = "reports/" + featureName + "/" + featureName + "_screenshots";
             Files.createDirectories(Paths.get(screenshotDir));
             
             TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -21,7 +21,7 @@ public class ScreenshotUtils {
             String filePath = screenshotDir + "/" + fileName;
             
             Files.copy(sourceFile.toPath(), Paths.get(filePath));
-            return "./screenshots/" + fileName;
+            return "./" + featureName + "_screenshots/" + fileName;
         } catch (IOException e) {
             System.out.println("Failed to capture screenshot: " + e.getMessage());
             return null;
