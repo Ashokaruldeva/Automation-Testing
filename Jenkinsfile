@@ -80,7 +80,7 @@ pipeline {
                     <div style="text-align: center;">
                         <a href="${env.BUILD_URL}Automation_Test_Reports/" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📊 Jenkins HTML Reports</a>
                         <br><br>
-                        <a href="${env.BUILD_URL}ws/reports/" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📁 Direct Workspace Reports</a>
+                        <a href="${env.BUILD_URL}execution/node/3/ws/reports/" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📁 Direct Reports Access</a>
                         <br><br>
                         <a href="${env.BUILD_URL}artifact/reports/" style="background-color: #FF9800; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📦 Archived Reports</a>
                     </div>
