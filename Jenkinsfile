@@ -77,7 +77,9 @@ pipeline {
                     <div style="text-align: center;">
                         <a href="${env.BUILD_URL}Automation_Test_Reports/" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📊 View All Reports</a>
                         <br><br>
-                        <a href="${env.BUILD_URL}Automation_Test_Reports/login/login_Report.html" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">🎯 View Login Test Report</a>
+                        <a href="${env.BUILD_URL}Automation_Test_Reports/login_Report.html" style="background-color: #2196F3; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">🎯 Direct Login Report</a>
+                        <br><br>
+                        <a href="${env.BUILD_URL}execution/node/3/ws/reports/login/login_Report.html" style="background-color: #FF9800; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 5px;">📄 Workspace Report</a>
                     </div>
                     <br>
                     <p style="color: #666; font-size: 12px;">This is an automated message from Jenkins CI/CD Pipeline</p>
