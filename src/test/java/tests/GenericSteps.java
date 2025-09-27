@@ -1,6 +1,7 @@
 package tests;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,6 +16,7 @@ import java.time.Duration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utils.ExtentReportManager;
 import utils.ScreenshotUtils;
+import utils.FeatureContext;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
@@ -22,15 +24,11 @@ public class GenericSteps {
     
     private WebDriver driver;
     private WebDriverWait wait;
-    private static String currentFeatureName;
-    
-    public static void setCurrentFeatureName(String featureName) {
-        currentFeatureName = featureName;
-    }
+
     
     private void logStepWithScreenshot(String stepDescription, String stepName) {
         ExtentTest test = ExtentReportManager.getTest();
-        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, currentFeatureName);
+        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, FeatureContext.getFeatureName());
         
         if (screenshotPath != null) {
             try {

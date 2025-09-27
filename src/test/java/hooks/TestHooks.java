@@ -1,12 +1,11 @@
 package hooks;
 
-import com.aventstack.extentreports.ExtentTest;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import tests.GenericSteps;
 import utils.ExtentReportManager;
+import utils.FeatureContext;
+import com.aventstack.extentreports.ExtentTest;
 
 public class TestHooks {
     
@@ -15,9 +14,8 @@ public class TestHooks {
         String featureName = scenario.getUri().toString().replaceAll(".*/", "").replace(".feature", "");
         String scenarioName = scenario.getName();
         
-        
-        // Set feature name first
-        GenericSteps.setCurrentFeatureName(featureName);
+        // Set feature name in ThreadLocal context
+        FeatureContext.setFeatureName(featureName);
         
         // Create ExtentReports test
         ExtentReportManager.createTest(featureName, scenarioName);
@@ -35,5 +33,8 @@ public class TestHooks {
         }
         
         ExtentReportManager.flushReport(featureName);
+        
+        // Clear ThreadLocal context
+        FeatureContext.clear();
     }
 }

@@ -1,4 +1,5 @@
 tests\GenericSteps.class
+utils\FeatureContext.class
 tests\TestRunner.class
 utils\ExtentReportManager.class
 utils\ScreenshotUtils.class
