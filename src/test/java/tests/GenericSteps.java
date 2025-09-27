@@ -25,17 +25,19 @@ public class GenericSteps {
     private static WebDriver driver;
     private static WebDriverWait wait;
     
-    private String getFeatureNameFromTest() {
-        ExtentTest test = ExtentReportManager.getTest();
-        String testName = test.getModel().getName();
-        // Extract feature name from test context
-        return testName.toLowerCase().split(" ")[0];
+    private static String currentFeatureName;
+    
+    public static void setCurrentFeatureName(String featureName) {
+        currentFeatureName = featureName;
+    }
+    
+    public static String getCurrentFeatureName() {
+        return currentFeatureName;
     }
     
     private void logStepWithScreenshot(String stepDescription, String stepName) {
         ExtentTest test = ExtentReportManager.getTest();
-        String featureName = getFeatureNameFromTest();
-        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, featureName);
+        String screenshotPath = ScreenshotUtils.captureScreenshot(driver, stepName, getCurrentFeatureName());
         
         if (screenshotPath != null) {
             try {

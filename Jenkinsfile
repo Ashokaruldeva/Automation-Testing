@@ -102,7 +102,7 @@ pipeline {
                 </div>
                 """,
                 mimeType: 'text/html',
-                to: 'ashokaruldeva@gmail.com, jawahar181099@gmail.com'
+                to: 'ashokaruldeva@gmail.com, jawahar181099@gmail.com, manojawahar1999@gmail.com'
             )
         }
     }
